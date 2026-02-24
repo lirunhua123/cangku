@@ -19,7 +19,7 @@
     </modules>
     <properties>
         <mybatis.spring>2.2.0</mybatis.spring>
-        <lombok>1.18.20</lombok>
+        <lombok>1.18.30</lombok>
         <fastjson>1.2.76</fastjson>
         <commons.lang>2.6</commons.lang>
         <druid>1.2.1</druid>
@@ -56,6 +56,8 @@
                 <artifactId>commons-lang</artifactId>
                 <version>${commons.lang}</version>
             </dependency>
+            <!-- sky-common 的 pom.xml 中添加 Lombok 依赖 -->
+
 
             <dependency>
                 <groupId>com.alibaba</groupId>
