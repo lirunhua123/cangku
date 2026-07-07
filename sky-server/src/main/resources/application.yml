@@ -4,6 +4,7 @@ server:
 spring:
   profiles:
     active: dev
+    # active: dev 就是告诉 Spring Boot 额外加载一个叫 application-dev.yml 的文件，里面的配置和主配置合并生效。换个环境只需改这一个词。
   main:
     allow-circular-references: true
   datasource:

@@ -14,7 +14,7 @@ import java.sql.SQLIntegrityConstraintViolationException;
  */
 //@RestControllerAdvice：标记这是一个全局异常处理类，会拦截所有 @RestController 抛出的异常。
 
-@RestControllerAdvice
+@RestControllerAdvice // ← 拦截所有 @RestController 里抛出的异常
 @Slf4j
 public class GlobalExceptionHandler {
 
@@ -23,6 +23,8 @@ public class GlobalExceptionHandler {
      * @param ex
      * @return
      */
+    /**@ExceptionHandler — 标记一个方法是异常处理器
+    它告诉 Spring："当 Controller 抛出这种异常时，就调这个方法来处理"。**/
     @ExceptionHandler
     public Result exceptionHandler(BaseException ex){
         log.error("异常信息：{}", ex.getMessage());
@@ -30,9 +32,10 @@ public class GlobalExceptionHandler {
     }
     /**
      * 处理SQL异常
-     * @param ex
+     * @param
      * @return
      */
+    //专门处理数据库唯一约束冲突
     @ExceptionHandler
     public Result exceptionHandler(SQLIntegrityConstraintViolationException ex){
         //Duplicate entry 'zhangsan' for key 'employee.idx_username'

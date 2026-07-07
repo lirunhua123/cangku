@@ -10,6 +10,6 @@ public class AccountNotFoundException extends BaseException {
 
     public AccountNotFoundException(String msg) {
         super(msg);
-    }
+    }// ← 把 msg 传给父类 BaseException
 
 }
