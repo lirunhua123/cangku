@@ -64,7 +64,6 @@ com\sky\entity\AddressBook.class
 com\sky\vo\SalesTop10ReportVO$SalesTop10ReportVOBuilder.class
 com\sky\dto\PasswordEditDTO.class
 com\sky\dto\ShoppingCartDTO.class
-com\sky\entity\DishFlavor$DishFlavorBuilder.class
 com\sky\vo\OrderPaymentVO$OrderPaymentVOBuilder.class
 com\sky\dto\DishPageQueryDTO.class
 com\sky\dto\OrdersDTO.class

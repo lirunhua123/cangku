@@ -10,7 +10,7 @@ public class DishPageQueryDTO implements Serializable {
     private int page;
 
     private int pageSize;
-
+    //菜品名称
     private String name;
 
     //分类id

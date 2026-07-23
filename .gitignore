@@ -1,6 +1,7 @@
-**/target/编译后产生的class文件会存放在target目录
+**/target/
 .idea
 *.iml
 *.class
 *Test.java
 **/test/
+application-dev.yml

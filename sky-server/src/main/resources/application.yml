@@ -7,13 +7,20 @@ spring:
     # active: dev 就是告诉 Spring Boot 额外加载一个叫 application-dev.yml 的文件，里面的配置和主配置合并生效。换个环境只需改这一个词。
   main:
     allow-circular-references: true
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
   datasource:
     druid:
       driver-class-name: ${sky.datasource.driver-class-name}
       url: jdbc:mysql://${sky.datasource.host}:${sky.datasource.port}/${sky.datasource.database}?serverTimezone=Asia/Shanghai&useUnicode=true&characterEncoding=utf-8&zeroDateTimeBehavior=convertToNull&useSSL=false&allowPublicKeyRetrieval=true
       username: ${sky.datasource.username}
       password: ${sky.datasource.password}
-
+  redis:
+    host: ${sky.redis.host}
+    port: ${sky.redis.port}
+    password: ${sky.redis.password}
+    database: ${sky.redis.database}
 mybatis:
   #mapper配置文件
   mapper-locations: classpath:mapper/*.xml
@@ -38,3 +45,18 @@ sky:
     admin-ttl: 72000000000000
     # 设置前端传递过来的令牌名称
     admin-token-name: token
+    #设置iwt签名加密时使用的密钥
+    user-secret-key: itheima
+    #设置jwt过期时间
+    user-ttl: 7200000000000
+    #设置前端穿过来的令牌名称
+    user-token-name: authentication
+
+  alioss:
+    endpoint: ${sky.alioss.endpoint}
+    access-key-id: ${sky.alioss.access-key-id}
+    access-key-secret: ${sky.alioss.access-key-secret}
+    bucket-name: ${sky.alioss.bucket-name}
+  wechat:
+    appid:${sky.whchat.appid}
+    secret:${sky.wechat.secret}
