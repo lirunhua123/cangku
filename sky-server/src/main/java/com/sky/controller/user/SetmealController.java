@@ -38,6 +38,10 @@ public class SetmealController {
         setmeal.setStatus(StatusConstant.ENABLE);
 
         List<Setmeal> list = setmealService.list(setmeal);
+        // TODO: OSS图片暂不可用，清空图片URL，恢复时删除下行
+        for (Setmeal s : list) {
+            s.setImage("");
+        }
         return Result.success(list);
     }
 
@@ -51,6 +55,10 @@ public class SetmealController {
     @ApiOperation("根据套餐id查询包含的菜品列表")
     public Result<List<DishItemVO>> dishList(@PathVariable("id") Long id) {
         List<DishItemVO> list = setmealService.getDishItemById(id);
+        // TODO: OSS图片暂不可用，清空图片URL，恢复时删除下行
+        for (DishItemVO vo : list) {
+            vo.setImage("");
+        }
         return Result.success(list);
     }
 }

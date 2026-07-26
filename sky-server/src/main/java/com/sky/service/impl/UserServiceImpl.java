@@ -12,7 +12,6 @@ import com.sky.utils.HttpClientUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.Map;
@@ -40,17 +39,15 @@ public class UserServiceImpl implements UserService {
         map.put("js_code", userloginDTO.getCode());
         map.put("grant_type","authorization_code");
         String json = HttpClientUtil.doGet(wx_LOGIN,map);
+        System.err.println("微信API返回内容: " + json);
         JSONObject jsonObject = JSONObject.parseObject(json);
         String openid = jsonObject.getString("openid");
 
-        try {
-            json = HttpClientUtil.doPost(wx_LOGIN, map);
-        } catch (IOException e) {
-            throw new LoginFailedException(MessageConstant.LOGIN_FAILED);
-        }
-
         //判断是否为空
         if(openid==null){
+            String errcode = jsonObject.getString("errcode");
+            String errmsg = jsonObject.getString("errmsg");
+            System.err.println("微信登录失败: errcode=" + errcode + ", errmsg=" + errmsg);
             throw new LoginFailedException(MessageConstant.LOGIN_FAILED);
         }
         //判断是否为新用户
@@ -65,17 +62,5 @@ public class UserServiceImpl implements UserService {
 
 
         return user;
-    }
-    private String getOpenid(String code){
-        Map<String,String> map = new HashMap<>();
-        map.put("appid",weChatProperties.getAppid());
-        map.put("secret",weChatProperties.getSecret());
-        map.put("js_code",code);
-        map.put("grant_type","authorization_code");
-        String json = HttpClientUtil.doGet(wx_LOGIN,map);
-        JSONObject jsonObject = JSONObject.parseObject(json);
-        String openid = jsonObject.getString("openid");
-        return openid;
-
     }
 }

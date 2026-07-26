@@ -54,7 +54,7 @@
             </if>
         </where>
         order by create_time desc
-    </select>//返回一个存放dish实体类的list
+    </select>
 
     <select id="pageQuery" resultType="com.sky.vo.DishVO">
         select d.* ,c.name as categoryName from dish d left outer join category c on d.category_id = c.id

@@ -56,10 +56,13 @@ public class HttpClientUtil {
             response = httpClient.execute(httpGet);
 
             //判断响应状态
-            if(response.getStatusLine().getStatusCode() == 200){
-                result = EntityUtils.toString(response.getEntity(),"UTF-8");
+            int statusCode = response.getStatusLine().getStatusCode();
+            result = EntityUtils.toString(response.getEntity(),"UTF-8");
+            if(statusCode != 200){
+                System.err.println("微信API返回非200状态码: " + statusCode + ", 响应: " + result);
             }
         }catch (Exception e){
+            System.err.println("调用微信API异常: " + e.getMessage());
             e.printStackTrace();
         }finally {
             try {

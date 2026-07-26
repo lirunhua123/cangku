@@ -41,6 +41,10 @@ public class DishController {
         List<DishVO> list = (List<DishVO>)redisTemplate.opsForValue().get(key);
         if(list!=null &&list.size()>0){
             //如果存在直接返回
+            // TODO: OSS图片暂不可用，清空图片URL，恢复时删除此行
+            for (DishVO vo : list) {
+                vo.setImage("");
+            }
             return Result.success(list);
         }
 
@@ -50,6 +54,10 @@ public class DishController {
         dish.setStatus(StatusConstant.ENABLE);//查询起售中的菜品
 
         list = dishService.listWithFlavor(dish);
+        // TODO: OSS图片暂不可用，清空图片URL，恢复时删除下行
+        for (DishVO vo : list) {
+            vo.setImage("");
+        }
         redisTemplate.opsForValue().set(key,list);
         return Result.success(list);
     }

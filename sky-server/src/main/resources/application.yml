@@ -19,7 +19,7 @@ spring:
   redis:
     host: ${sky.redis.host}
     port: ${sky.redis.port}
-    password: ${sky.redis.password}
+    password: ${sky.redis.password:}
     database: ${sky.redis.database}
 mybatis:
   #mapper配置文件
@@ -58,5 +58,5 @@ sky:
     access-key-secret: ${sky.alioss.access-key-secret}
     bucket-name: ${sky.alioss.bucket-name}
   wechat:
-    appid:${sky.whchat.appid}
-    secret:${sky.wechat.secret}
+    appid: ${sky.wechat.appid}
+    secret: ${sky.wechat.secret}
