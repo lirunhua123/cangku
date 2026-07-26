@@ -1,9 +1,11 @@
 package com.sky.controller.user;
 
+import com.sky.dto.OrdersPaymentDTO;
 import com.sky.dto.OrdersSubmitDTO;
 import com.sky.result.PageResult;
 import com.sky.result.Result;
 import com.sky.service.OrderService;
+import com.sky.vo.OrderPaymentVO;
 import com.sky.vo.OrderSubmitVO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -20,19 +22,6 @@ public class OrderController {
     @Autowired
     private OrderService orderService;
 
-
-    /**
-     * 历史订单分页查询
-     */
-    @GetMapping("/historyOrders")
-    @ApiOperation("历史订单分页查询")
-    public Result<PageResult> historyOrders(@RequestParam(defaultValue = "1") int page,
-                                            @RequestParam(defaultValue = "10") int pageSize) {
-        log.info("查询历史订单：page={}, pageSize={}", page, pageSize);
-        PageResult pageResult = orderService.pageQuery4User(page, pageSize);
-        return Result.success(pageResult);
-    }
-
     /**
      * 用户下单
      * @param ordersSubmitDTO
@@ -44,6 +33,31 @@ public class OrderController {
         log.info("用户下单，参数为：{}", ordersSubmitDTO);
         OrderSubmitVO orderSubmitVO = orderService.submitOrder(ordersSubmitDTO);
         return Result.success(orderSubmitVO);
+    }
 
+    /**
+     * 订单支付
+     * @param ordersPaymentDTO
+     * @return
+     */
+    @PutMapping("/payment")
+    @ApiOperation(("订单支付"))
+    public Result<OrderPaymentVO> payment(@RequestBody OrdersPaymentDTO ordersPaymentDTO) throws Exception {
+        log.info("订单支付：{}", ordersPaymentDTO);
+        OrderPaymentVO orderPaymentVO = orderService.payment(ordersPaymentDTO);
+        log.info("生成预支付交易单：{}", orderPaymentVO);
+        return Result.success(orderPaymentVO);
+    }
+
+    /**
+     * 历史订单分页查询
+     */
+    @GetMapping("/historyOrders")
+    @ApiOperation("历史订单分页查询")
+    public Result<PageResult> historyOrders(@RequestParam(defaultValue = "1") int page,
+                                            @RequestParam(defaultValue = "10") int pageSize) {
+        log.info("查询历史订单：page={}, pageSize={}", page, pageSize);
+        PageResult pageResult = orderService.pageQuery4User(page, pageSize);
+        return Result.success(pageResult);
     }
 }
