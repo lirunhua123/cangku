@@ -42,6 +42,6 @@ public class OrderDetail implements Serializable {
     //金额
     private BigDecimal amount;
 
-    //图片
+    //图片 图片路径
     private String image;
 }

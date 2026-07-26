@@ -21,4 +21,10 @@ public interface OrderMapper {
      */
     @Select("select * from order_detail where order_id = #{orderId}")
     List<com.sky.entity.OrderDetail> getOrderDetailsByOrderId(@Param("orderId") Long orderId);
+
+    /**
+     * 插入订单数据
+     * @param orders
+     */
+    void insert(Orders orders);
 }
