@@ -204,7 +204,7 @@ public class ReportServiceimpl implements ReportService {
 
         //2通过poi写入excel文件中
 
-        InputStream in = this.getClass().getClassLoader().getResourceAsStream("template/运营数据报表模板");
+        InputStream in = this.getClass().getClassLoader().getResourceAsStream("template/运营数据报表模板.xlsx");
 
 
         try {
